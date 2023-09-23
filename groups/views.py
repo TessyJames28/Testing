@@ -1,21 +1,23 @@
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
-from .models import Image, Group, UserGroups, GroupEvents, GroupImage
+from .models import Image, Group, User_Groups, Group_Events, Group_Image
 from .serializers import (ImageSerializer,
                           GroupSerializer,
                           UserGroupsSerializer,
                           GroupEventsSerializer,
                           GroupImageSerializer)
+from rest_framework.permissions import IsAuthenticated
+from users.views import AuthenticationMiddleware
 
  
 
-class ImageViewSet(viewsets.ModelViewSet):
+class ImageViewSet(AuthenticationMiddleware, viewsets.ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
+class GroupViewSet(AuthenticationMiddleware, viewsets.ModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
@@ -27,7 +29,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     #     if serializer.is_valid():
     #         group = serializer.save()
             
-    #         # Add the group creator to the UserGroups relationship
+    #         # Add the group creator to the User_Groups relationship
     #         group_owner = request.user
     #         group.usergroups_set.create(user=group_owner)
             
@@ -36,18 +38,18 @@ class GroupViewSet(viewsets.ModelViewSet):
     #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserGroupsViewSet(viewsets.ModelViewSet):
-    queryset = UserGroups.objects.all()
+class UserGroupsViewSet(AuthenticationMiddleware, viewsets.ModelViewSet):
+    queryset = User_Groups.objects.all()
     serializer_class = UserGroupsSerializer
 
 
-class GroupEventsViewSet(viewsets.ModelViewSet):
-    queryset = GroupEvents.objects.all()
+class GroupEventsViewSet(AuthenticationMiddleware, viewsets.ModelViewSet):
+    queryset = Group_Events.objects.all()
     serializer_class = GroupEventsSerializer
 
 
-class GroupImageViewSet(viewsets.ModelViewSet):
-    queryset = GroupImage.objects.all()
+class GroupImageViewSet(AuthenticationMiddleware, viewsets.ModelViewSet):
+    queryset = Group_Image.objects.all()
     serializer_class = GroupImageSerializer
 
 

@@ -59,7 +59,7 @@ INSTALLED_APPS = [
     "groups",
     "drf_yasg",
     "likes",
-    "storages",
+    # "storages",
 
 ]
 

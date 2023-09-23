@@ -2,9 +2,9 @@ from django.db import models
 
 class User(models.Model):
     id = models.CharField(max_length= 60, primary_key=True, editable=False)
-    name = models.CharField(max_length=255)
-    email = models.CharField(max_length=255, unique=True)
-    avatar = models.CharField(max_length=255, blank=True)
+    name = models.TextField(max_length=255)
+    email = models.TextField(max_length=255, unique=True)
+    avatar = models.TextField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     
@@ -20,5 +20,9 @@ class User(models.Model):
     
     @property
     def is_authenticated(self):
+        return True
+    
+    @property
+    def is_active(self):
         return True
     

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Image, Group, UserGroups, GroupEvents, GroupImage
+from .models import Image, Group, User_Groups, Group_Events, Group_Image
 from users.models import User
 from events.models import Event
 
@@ -21,7 +21,7 @@ class UserGroupsSerializer(serializers.ModelSerializer):
     group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all())
 
     class Meta:
-        model = UserGroups
+        model = User_Groups
         fields = '__all__'
 
 
@@ -30,11 +30,11 @@ class GroupEventsSerializer(serializers.ModelSerializer):
     group = serializers.PrimaryKeyRelatedField(queryset=Group.objects.all())
 
     class Meta:
-        model = GroupEvents
+        model = Group_Events
         fields = '__all__'
 
 
 class GroupImageSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GroupImage
+        model = Group_Image
         fields = '__all__'
